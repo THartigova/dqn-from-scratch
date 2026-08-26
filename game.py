@@ -39,7 +39,6 @@ class DodgeGame:
 
         self.screen.fill(COLOR_BG)
 
-        # jemná mřížka na pozadí — pomáhá oku vnímat prostor
         for gx in range(self.width):
             pygame.draw.line(
                 self.screen, COLOR_GRID,
@@ -51,7 +50,7 @@ class DodgeGame:
                 (0, gy * CELL_SIZE), (self.width * CELL_SIZE, gy * CELL_SIZE)
             )
 
-        # hráč — zaoblený čtverec s jemnou "glow" vrstvou pod ním
+
         player_rect = pygame.Rect(
             self.player_x * CELL_SIZE + 2, self.player_y * CELL_SIZE + 2,
             CELL_SIZE - 4, CELL_SIZE - 4
@@ -60,9 +59,8 @@ class DodgeGame:
         pygame.draw.rect(self.screen, COLOR_PLAYER_GLOW, glow_rect, border_radius=12)
         pygame.draw.rect(self.screen, COLOR_PLAYER, player_rect, border_radius=8)
 
-        # překážky — zaoblené, s fading trail nad sebou
         for ox, oy in self.obstacles:
-            # trail: 3 stále průhlednější kopie nad překážkou
+           
             for trail_step in range(1, 4):
                 trail_y = oy - trail_step
                 if trail_y < 0:
@@ -81,7 +79,7 @@ class DodgeGame:
             )
             pygame.draw.rect(self.screen, COLOR_OBSTACLE, obs_rect, border_radius=6)
 
-        # bonusy — zaoblené, s jemnou září jako u hráče
+        
         for bx, by in self.bonuses:
             bonus_rect = pygame.Rect(
                 bx * CELL_SIZE + 5, by * CELL_SIZE + 5,
